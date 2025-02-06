@@ -9,7 +9,7 @@ OBJ = $(SRC:.c=.o)
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBFT = $(LIBFT_DIR)/libft.a
 
-all: $(FT_PRINTF) $(LIBFT) $(NAME) clean 
+all: $(FT_PRINTF) $(LIBFT) $(NAME) clean run
 
 $(FT_PRINTF):
 	@$(MAKE) -C $(FT_PRINTF_DIR)
@@ -22,6 +22,11 @@ $(NAME): $(OBJ) $(FT_PRINTF) $(LIBFT)
 
 %.o: %.c 
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+run:
+	@echo "\033[1;32m./pipex\033[0m"
+	@echo "\033[1;33m--------\033[0m"
+	@./$(NAME)
 
 clean:
 	@$(RM) $(OBJ)
