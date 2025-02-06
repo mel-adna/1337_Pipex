@@ -6,13 +6,13 @@
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:26:03 by mel-adna          #+#    #+#             */
-/*   Updated: 2024/12/04 08:30:20 by mel-adna         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:01:46 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int	ft_strchr(const char *s, int c)
+int	gnl_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ft_strchr(const char *s, int c)
 	return (-1);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -38,12 +38,12 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t destsize)
+size_t	gnl_strlcpy(char *dst, const char *src, size_t destsize)
 {
 	size_t	src_len;
 	size_t	c;
 
-	src_len = ft_strlen(src);
+	src_len = gnl_strlen(src);
 	c = 0;
 	if (destsize == 0)
 		return (src_len);
@@ -56,7 +56,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t destsize)
 	return (src_len);
 }
 
-char	*ft_strdup(const char *s)
+char	*gnl_strdup(const char *s)
 {
 	char	*dup;
 	size_t	len;
@@ -65,7 +65,7 @@ char	*ft_strdup(const char *s)
 	i = 0;
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
+	len = gnl_strlen(s);
 	dup = malloc(len + 1);
 	if (!dup)
 		return (NULL);
@@ -78,7 +78,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	char	*start;
@@ -88,7 +88,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = "";
 	if (!s2)
 		s2 = "";
-	total_len = ft_strlen(s1) + ft_strlen(s2);
+	total_len = gnl_strlen(s1) + gnl_strlen(s2);
 	result = malloc(total_len + 1);
 	if (!result)
 		return (NULL);

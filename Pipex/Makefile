@@ -4,12 +4,13 @@ NAME = pipex
 RM = rm -f
 FT_PRINTF_DIR = ft_printf
 LIBFT_DIR = libft
-SRC = gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c pipex.c
+SRC = gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c pipex.c \
+	pipex_utils.c
 OBJ = $(SRC:.c=.o)
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBFT = $(LIBFT_DIR)/libft.a
 
-all: $(FT_PRINTF) $(LIBFT) $(NAME) clean run
+all: $(FT_PRINTF) $(LIBFT) $(NAME) clean
 
 $(FT_PRINTF):
 	@$(MAKE) -C $(FT_PRINTF_DIR)
@@ -26,7 +27,7 @@ $(NAME): $(OBJ) $(FT_PRINTF) $(LIBFT)
 run:
 	@echo "\033[1;32m./pipex\033[0m"
 	@echo "\033[1;33m--------\033[0m"
-	@./$(NAME)
+	@./$(NAME) in "ls -l" "cat -e" out
 
 clean:
 	@$(RM) $(OBJ)

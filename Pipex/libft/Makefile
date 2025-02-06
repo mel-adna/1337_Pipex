@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) 
+$(NAME): $(OBJS) bonus
 	@ar rcs $(NAME) $(OBJS)
 
 %.o: %.c libft.h
