@@ -1,5 +1,16 @@
-#include "pipex.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/08 13:33:12 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/02/08 13:55:45 by mel-adna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "pipex.h"
 
 void	*free_paths(char **paths)
 {
@@ -55,7 +66,7 @@ void	execute_cmd(t_cmd *cmd, char **env)
 	{
 		ft_putstr_fd("Command not found: ", 2);
 		ft_putendl_fd(cmd->str[0], 2);
-		exit(127);
+		exit(1);
 	}
 	execve(path, cmd->str, env);
 	free(path);

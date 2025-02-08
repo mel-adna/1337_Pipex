@@ -4,8 +4,8 @@ NAME = pipex
 RM = rm -f
 FT_PRINTF_DIR = ft_printf
 LIBFT_DIR = libft
-SRC = gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c pipex.c \
-	pipex_utils.c
+SRC = gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c pipex.c parse.c \
+	pipex_utils.c 
 OBJ = $(SRC:.c=.o)
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBFT = $(LIBFT_DIR)/libft.a

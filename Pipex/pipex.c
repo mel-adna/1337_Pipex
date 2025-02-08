@@ -1,15 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/08 13:33:15 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/02/08 13:57:32 by mel-adna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-void	free_cmds(t_cmd *cmds)
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+void	free_cmds(t_cmd **cmds)
 {
 	t_cmd	*tmp;
 
-	while (cmds)
+	if (!cmds || !*cmds)
+		return ;
+	while (*cmds)
 	{
-		tmp = cmds;
-		cmds = cmds->next;
-		free(tmp->str);
-		free(tmp);
+		tmp = (*cmds)->next;
+		free_arr((*cmds)->str);
+		free(*cmds);
+		*cmds = tmp;
 	}
 }
 
@@ -23,7 +47,7 @@ void	ft_cmd_add(t_cmd **list, char *argv)
 	new = malloc(sizeof(t_cmd));
 	if (!new)
 		return ;
-	new->str = ft_split(argv, ' ');
+	new->str = parse_args(argv);
 	new->next = NULL;
 	if (!*list)
 	{
@@ -67,7 +91,7 @@ int	main(int argc, char **argv, char **env)
 		while (i < argc - 1)
 			ft_cmd_add(&cmds, argv[i++]);
 		ft_pipex(cmds, &fd, env);
-		free_cmds(cmds);
+		free_cmds(&cmds);
 	}
 	else
 	{
