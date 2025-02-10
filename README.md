@@ -59,6 +59,11 @@ Compile the program using:
 ```bash
 make
 ```
+For bonus:
+
+```bash
+make bonus
+```
 
 This will generate the executable **pipex**.
 
