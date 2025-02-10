@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 10:58:28 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/02/10 10:59:54 by mel-adna         ###   ########.fr       */
+/*   Created: 2025/02/10 11:05:45 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/02/10 11:06:14 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,21 @@ void	wait_childern(int *pids, int size)
 	{
 		if (waitpid(pids[i], &status, 0) == -1)
 		{
+			free(pids);
 			perror("Waitpid");
 			exit(1);
 		}
 		status = WEXITSTATUS(status);
 		if (status == 127 && i == size - 1)
+		{
+			free(pids);
 			exit(status);
+		}
 		i++;
 	}
 	free(pids);
+	if (access("/tmp/heredoc", F_OK) == 0)
+		unlink("/tmp/heredoc");
 }
 
 char	*get_path(char *cmd, char **env)

@@ -1,23 +1,17 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = pipex
+NAME = ../pipex_bonus
 RM = rm -f
-LIBFT_DIR = libft
-BONUS_DIR = bonus
-SRC = pipex.c parse.c pipex_utils.c pipex_utils1.c 
+LIBFT_DIR = ../libft
+SRC = gnl/get_next_line_bonus.c gnl/get_next_line_utils_bonus.c pipex.c parse.c \
+	pipex_utils.c pipex_utils1.c 
 OBJ = $(SRC:.c=.o)
 LIBFT = $(LIBFT_DIR)/libft.a
-BONUS = $(BONUS_DIR)/pipex_bonus
 
 all: $(LIBFT) $(NAME) clean
 
-bonus: $(BONUS)
-
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
-
-$(BONUS):
-	@$(MAKE) -C $(BONUS_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
@@ -28,12 +22,10 @@ $(NAME): $(OBJ) $(LIBFT)
 clean:
 	@$(RM) $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@$(MAKE) -C $(BONUS_DIR) clean
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(BONUS_DIR) fclean
 
 re: fclean all
 

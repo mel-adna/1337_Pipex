@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 18:18:56 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/02/10 10:27:31 by mel-adna         ###   ########.fr       */
+/*   Created: 2024/12/02 00:45:43 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/02/05 13:02:40 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <fcntl.h>
-# include <errno.h>
-# include <stdio.h>
 
-typedef struct s_fd
-{
-	int	in;
-	int	out;
-	int	fd_pip[2];
-	int	pid;
-}		t_fd;
-typedef struct s_cmd
-{
-	char			**str;
-	struct s_cmd	*next;
-}					t_cmd;
+char	*get_next_line(int fd);
+char	*readline(int fd, char *rest);
+void	free_str(char **str);
+char	*extract_line(char *rest);
+char	*up_rest(char **rest);
+int		ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(const char *s);
 
-char	**parse_arg(char *str);
-void	ft_pipex(t_cmd *cmds, t_fd fd, char **env);
-void	*free_paths(char **paths);
-void	change_fd(int fd, int oldfd);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 #endif

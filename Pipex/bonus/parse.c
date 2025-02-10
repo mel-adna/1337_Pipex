@@ -5,40 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-adna <mel-adna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 10:55:58 by mel-adna          #+#    #+#             */
-/*   Updated: 2025/02/10 10:56:11 by mel-adna         ###   ########.fr       */
+/*   Created: 2025/02/10 11:02:29 by mel-adna          #+#    #+#             */
+/*   Updated: 2025/02/10 11:02:40 by mel-adna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*check_quote(char *str, int *i, int *start, int mode)
+int	is_empty_or_spaces(char *str)
 {
-	if (mode == 1)
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	return (!str[i]);
+}
+
+char	*check_quote(char *str, int *i)
+{
+	int		start;
+	char	*word;
+
+	if (str[*i] == '\'')
 	{
 		(*i)++;
-		*start = *i;
+		start = *i;
 		while (str[*i] && str[*i] != '\'')
 			(*i)++;
-		if (str[*i] == '\'')
-			return (ft_substr(str, *start, *i++ - *start));
-		return (NULL);
+		word = ft_substr(str, start, *i - start);
+		if (str[*i])
+			(*i)++;
 	}
 	else
 	{
+		start = *i;
 		while (str[*i] && str[*i] != ' ')
 			(*i)++;
-		return (ft_substr(str, *start, *i - *start));
+		word = ft_substr(str, start, *i - start);
 	}
+	return (word);
 }
 
 char	**parse_arg(char *str)
 {
 	char	**args;
-	int		start;
-	int		count;
 	int		i;
+	int		count;
 
+	if (!str || is_empty_or_spaces(str))
+		return (NULL);
 	args = malloc(sizeof(char *) * 42);
 	if (!args)
 		return (NULL);
@@ -50,13 +66,25 @@ char	**parse_arg(char *str)
 			i++;
 		if (!str[i])
 			break ;
-		start = i;
-		if (str[i] == '\'')
-			args[count] = check_quote(str, &i, &start, 1);
-		else
-			args[count] = check_quote(str, &i, &start, 0);
+		args[count] = check_quote(str, &i);
+		if (!args[count])
+			return (free_paths(args));
 		count++;
 	}
 	args[count] = NULL;
 	return (args);
+}
+
+void	check_args(int ac, int mode)
+{
+	if (mode == 1 && ac < 6)
+	{
+		ft_putstr_fd("Error: too few arguments\n", 2);
+		exit(1);
+	}
+	if (mode == 2 && ac < 5)
+	{
+		ft_putstr_fd("Error: too few arguments\n", 2);
+		exit(1);
+	}
 }
