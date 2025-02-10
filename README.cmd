@@ -84,7 +84,7 @@ ls -l < input.txt | wc -l > output.txt
 ### **Bonus Features**
 - **Multiple Pipes:**
   ```bash
-  ./pipex infile "cmd1" "cmd2" "cmd3" ... "cmdN" outfile
+  ./pipex_bonus infile "cmd1" "cmd2" "cmd3" ... "cmdN" outfile
   ```
   Equivalent to:
   ```bash
@@ -93,7 +93,7 @@ ls -l < input.txt | wc -l > output.txt
 
 - **Here Document (`<<` and `>>` support):**
   ```bash
-  ./pipex here_doc LIMITER cmd cmd1 file
+  ./pipex_bonus here_doc LIMITER cmd cmd1 file
   ```
   Equivalent to:
   ```bash
