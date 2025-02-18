@@ -3,8 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = ../pipex
 RM = rm -f
 LIBFT_DIR = ../libft
-SRC = gnl/get_next_line.c gnl/get_next_line_utils.c pipex.c parse.c \
-	pipex_utils.c pipex_utils1.c 
+SRC = gnl/get_next_line.c gnl/get_next_line_utils.c pipex_bonus.c parse_bonus.c \
+	pipex_utils_bonus.c pipex_utils1_bonus.c 
 OBJ = $(SRC:.c=.o)
 LIBFT = $(LIBFT_DIR)/libft.a
 
